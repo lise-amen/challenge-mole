@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Melvin
+Notebooks/3.Shape_detection.ipynb
+data/Mole_Data/
