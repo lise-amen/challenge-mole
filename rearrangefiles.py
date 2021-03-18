@@ -1,6 +1,7 @@
 # BeCode AI Bootcamp
 # Challenge 17/03/2021: Mole Detection
-# This file allows to copy images from original directories 'SET_D', 'SET_E' and 'SET_F' to the new directories ./myfolder/i, where i = 1, 2 or 3 is the class (or category) of the image which will be used for classification. The user only needs to specify the name ./myfolder, the directories ./myfolder/i will be build automatically
+# This file allows to copy images from original directories 'SET_D', 'SET_E' and 'SET_F' to the new directories ./myfolder/i, where i = 1, 2 or 3 is the class (or category) of the image which will be used for classification. 
+# The user only needs to specify the name ./myfolder, the directories ./myfolder/i will be built automatically
 # Contributor: Frédéric Fourré
  
 
