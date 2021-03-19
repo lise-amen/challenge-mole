@@ -130,4 +130,7 @@ dmypy.json
 
 # Melvin
 Notebooks/3.Shape_detection.ipynb
+Notebooks/slip_file.ipynb
 data/Mole_Data/
+data/Mole_Data_Rearranged/
+data/Preprocessed_data/
