@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os
 
 def mole_detection(img_link:str, new_name:str, lower_color_bound=(0,0,0), upper_color_bound=(255,110,255)):
     """
@@ -46,4 +47,20 @@ def mole_detection(img_link:str, new_name:str, lower_color_bound=(0,0,0), upper_
 
 if __name__ == '__main__':
 
-    mole_detection("../data/Mole_Data/All_set/D1.BMP","../data/Preprocessed_data/new_D1.BMP")
+    # directory after downloading images
+    datpath = '../data/Mole_Data_Rearranged'
+
+    dir1 = os.listdir(datpath)
+    dir2 = ["0", "1"]
+
+    for i in range(len(datpath)):
+        images = os.listdir(datpath + '/' + dir2[i])
+        srcp = datpath + '/' + dir2[i] + '/'
+
+        for image in images:
+            img_link = srcp + image
+            new_name = "../data/Preprocessed_data/" + f"{i}" + "/" + image
+            try:
+                mole_detection(img_link, new_name)
+            except:
+                continue
