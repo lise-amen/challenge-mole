@@ -53,7 +53,7 @@ if __name__ == '__main__':
     dir1 = os.listdir(datpath)
     dir2 = ["0", "1"]
 
-    for i in range(len(datpath)):
+    for i in range(len(dir1)):
         images = os.listdir(datpath + '/' + dir2[i])
         srcp = datpath + '/' + dir2[i] + '/'
 
