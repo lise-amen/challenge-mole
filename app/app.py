@@ -1,10 +1,10 @@
 import os
-from flask import request, Flask, flash, redirect, url_for
+from flask import request, Flask, flash, redirect, url_for, render_template
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'BMP'])
 
@@ -12,25 +12,19 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def home():
-	return "Hello World!"
+	return render_template("base.html")
 
-@app.route("/upload", methods=["GET", "POST"])
+@app.route('/upload')
 def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+   return render_template('upload.html')
+	
+@app.route('/uploader', methods = ['GET', 'POST'])
+def upload_files():
+   if request.method == 'POST':
+      f = request.files['file']
+      f.save(secure_filename(f.filename))
+      return 'file uploaded successfully'
 
 if __name__ == '__main__':
 	app.run(port=5000)
-
+	app.run(debug=True)
