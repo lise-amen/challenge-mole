@@ -6,6 +6,12 @@ The purpose is to do an AI that can detect when the mole is dangerous.
 
 ## Description
 
+## Steps to improve the score
+
+Preprocessing 
+
+- mole are extracted from the initial image and is placed on a black background.
+
 
 ## Usage
 
