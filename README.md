@@ -21,9 +21,5 @@ The needed libraries are in the requirement.txt. To install it, use the command 
 -----
 ### Author
 
-Melvin Leroy, junior AI developer at BeCode
-Lise Amen, junior AI developer at BeCode
-Axelle Paquet, junior AI developer at BeCode
-Frédéric Fourré junior AI developer at BeCode
-Jonathan Decleire, junior AI developer at BeCode
+Melvin Leroy, Lise Amen, Axelle Paquet, Frédéric Fourré, Jonathan Decleire
 
