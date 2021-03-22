@@ -1,16 +1,16 @@
 <html>
     <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/main.css') }}">
         {% if title %}
         <title>{{ title }}</title>
         {% else %}
-        <title>Ny-Nav</title>
+        <title>Mole detector</title>
         {% endif %}
     </head>
     <body>
         <div class ="header_menu">
             <p id = "menu">
-            <a class="link_menu" href="{{ url_for('upload') }}">/Upload</a>
+            <a class="link_menu" href="{{ url_for('upload_file') }}">/Upload</a>
             
             </p>
         </div>
@@ -18,7 +18,9 @@
     {% block content %}{% endblock %}
     </div>
     <div class="footer">
-        <!--<img id="img_ny"src="../static/img/NYC-Central-Park.jpg" alt="NewYork">-->
-    </div>
+        <div class="footerContainer">
+          <div class="imginthefooter"></div>
+        </div>
+      </div>
     </body>
 </html>
