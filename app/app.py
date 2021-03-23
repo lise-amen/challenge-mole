@@ -12,7 +12,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def home():
-	return render_template("base.html")
+	return render_template("start.html")
 
 @app.route('/upload')
 def upload_file():
@@ -25,6 +25,9 @@ def upload_files():
       f.save(secure_filename(f.filename))
       return 'file uploaded successfully'
 
+@app.route("/authors")
+def authors():
+	return render_template("authors.html")
+
 if __name__ == '__main__':
-	app.run(port=5000)
-	app.run(debug=True)
+	app.run(debug=True, port=5000)
