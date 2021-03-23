@@ -2,10 +2,18 @@
 
 {% block content %}
 
-    <form action = "http://localhost:5000/uploader" method = "POST" 
-        enctype = "multipart/form-data">
-        <input type = "file" name = "file" />
-        <input type = "submit"/>
+    <h1>File Upload</h1>
+
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <div class="form-group"
+
+            <label>Select image</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="image" id="image">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload image</button>
     </form>   
 
 {% endblock %}

@@ -55,7 +55,12 @@ h1{
     color: rgb(6, 31, 31);
     text-decoration: none;
     font-weight: bold;
-}  
+}
+
+.git:hover {
+    color :darkgoldenrod;
+}
+
 .button {
     margin-top: 20px;
       box-shadow:inset 0px 1px 0px 0px #f7c5c0;
