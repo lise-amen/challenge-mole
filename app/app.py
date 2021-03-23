@@ -3,11 +3,19 @@ from flask import request, Flask, flash, redirect, url_for, render_template
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
+import torch
+import torch.nn as nn
+
+from PIL import Image
+
+from Python_files.model_functions import mynet, data_transform
+
 
 app = Flask(__name__, template_folder="templates")
 
-app.config['IMAGE_UPLOADS'] = "/home/melvin/Documents/BeCode/Projects/challenge-mole/app/static/image/uploads"
+app.config['IMAGE_UPLOADS'] = "app/static/image/uploads/"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPG", "JPEG", "PNG", "BMP"]
+app.config["MODEL_PATH"] = "app/static/model/state_dict_model.pt"
 
 @app.route('/')
 def home():
@@ -55,7 +63,26 @@ def upload_image():
 
 @app.route("/uploaded", methods=["GET", "POST"])
 def uploaded_image():
-	return "Ok tu as upload une image"
+
+	filename = os.listdir(app.config["IMAGE_UPLOADS"])
+
+	img_path = app.config["IMAGE_UPLOADS"] + filename[0]
+
+	image = data_transform(img_path)
+
+	model = mynet()
+	model.load_state_dict(torch.load(app.config["MODEL_PATH"]))
+	model.eval()
+
+	output = model(image)
+
+	fsoftmax = nn.Softmax()
+
+	proba = fsoftmax(output)
+
+	_, indice = torch.max(proba, dim=1)
+	
+	return str(indice.item())
 
 @app.route("/authors")
 def authors():
