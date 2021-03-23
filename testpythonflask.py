@@ -1,28 +1,16 @@
-#fichier pour entrer une seule image au format .bmp ou etc. dans le modèle PyTorch
-
+# File to check the PyTorch CNN model on a single mole image 
+# To execute this file: exec(open('testpythonflask.py').read()) 
+# Contributor: Frédéric Fourré
 
 import cv2
 import os
-import shutil
 import numpy as np
 import matplotlib.pyplot as plt
-import datetime
-import pandas as pd
-import seaborn as sns
-from IPython.display import display 
-
-from torch.utils.data import DataLoader
-from sklearn.model_selection import train_test_split
+from PIL import Image
 
 import torch
 import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-import torchvision
 import torchvision.transforms as transforms
-from torchvision import datasets
-
-from sklearn.metrics import confusion_matrix
 
 
 class mynet(nn.Module):
@@ -58,20 +46,28 @@ filename='6987CNN2pixel64kernel3inputC643216epoch200.pt'
 
 loaded_model.load_state_dict(torch.load(model_path + filename))
 
-sizein=64
+datpath='./pytorchdat/3'
 
-datpath='./upload'
+# images in classe 3: D269, D288, D322, D328, D329, D340, D353, D437, D540
+imgname='D540.BMP'
 
-filename='90d269.bmp'
+# read image with cv2
+#image = cv2.imread(datpath + '/' + imgname, cv2.IMREAD_COLOR)
+#imagec = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-image = cv2.imread(datpath + '/'+ filename) 
+# read the image with PIL
+imagec = Image.open(datpath + '/' + imgname)
+
+plt.imshow(imagec)
+plt.show()
 
 t2=transforms.ToTensor()
 
-imgt2=t2(image)
+imgt2=t2(imagec)
 
 print(imgt2.shape)
 
+sizein=64
 t1=transforms.Resize((sizein,sizein))
 
 imgt1=t1(imgt2)
@@ -82,7 +78,7 @@ img=imgt1.unsqueeze(0)
 
 print(img.shape)
 
-output=model(img)
+output=loaded_model(img)
 
 fsoftmax = nn.Softmax()
 
