@@ -8,16 +8,16 @@ import torch.nn as nn
 
 from PIL import Image
 
-from Python_files.model_functions import mynet, data_transform
+from app.Python_files.model_functions import mynet, data_transform
 
 
-app = Flask(__name__, template_folder="templates")
+mole_detect = Flask(__name__, template_folder="templates")
 
-app.config['IMAGE_UPLOADS'] = "app/static/image/uploads/"
-app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPG", "JPEG", "PNG", "BMP"]
-app.config["MODEL_PATH"] = "app/static/model/state_dict_model.pt"
+mole_detect.config['IMAGE_UPLOADS'] = "app/static/image/uploads/"
+mole_detect.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPG", "JPEG", "PNG", "BMP"]
+mole_detect.config["MODEL_PATH"] = "app/static/model/state_dict_model.pt"
 
-@app.route('/')
+@mole_detect.route('/')
 def home():
 	return render_template("start.html")
 
@@ -28,13 +28,13 @@ def allowed_image(filename):
 	
 	ext = filename.rsplit(".", 1)[1]
 
-	if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+	if ext.upper() in mole_detect.config["ALLOWED_IMAGE_EXTENSIONS"]:
 		return True
 	
 	else:
 		return False
 
-@app.route('/upload', methods=["GET", "POST"])
+@mole_detect.route('/upload', methods=["GET", "POST"])
 def upload_image():
 
 	if request.method == "POST":
@@ -54,24 +54,24 @@ def upload_image():
 			else:
 				filename = secure_filename(image.filename)
 
-				image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+				image.save(os.path.join(mole_detect.config["IMAGE_UPLOADS"], filename))
 
 			print("Image saved")
 
 			return redirect("/uploaded")
 	return render_template('upload.html')
 
-@app.route("/uploaded", methods=["GET", "POST"])
+@mole_detect.route("/uploaded", methods=["GET", "POST"])
 def uploaded_image():
 
-	filename = os.listdir(app.config["IMAGE_UPLOADS"])
+	filename = os.listdir(mole_detect.config["IMAGE_UPLOADS"])
 
-	img_path = app.config["IMAGE_UPLOADS"] + filename[0]
+	img_path = mole_detect.config["IMAGE_UPLOADS"] + filename[0]
 
 	image = data_transform(img_path)
 
 	model = mynet()
-	model.load_state_dict(torch.load(app.config["MODEL_PATH"]))
+	model.load_state_dict(torch.load(mole_detect.config["MODEL_PATH"]))
 	model.eval()
 
 	output = model(image)
@@ -92,9 +92,9 @@ def uploaded_image():
 	
 	return render_template("uploaded.html", pred=pred)
 
-@app.route("/authors")
+@mole_detect.route("/authors")
 def authors():
 	return render_template("authors.html")
 
 if __name__ == '__main__':
-	app.run(debug=True, port=5000)
+	mole_detect.run(debug=True, port=5000)
