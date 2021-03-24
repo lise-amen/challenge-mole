@@ -42,13 +42,6 @@ def data_transform(img_path:str):
     transformc = transforms.Compose([transforms.ToTensor(), transforms.Resize((sizein,sizein))])
     image = transformc(image)
     
-    """
-    t2 = transforms.ToTensor()
-    image = t2(image)
-
-    t1 = transforms.Resize((sizein,sizein))
-    image = t1(image)
-    """
     image = image.unsqueeze(0)
 
     return image
