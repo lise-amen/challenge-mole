@@ -2,6 +2,18 @@
 
 {% block content %}
 
-    
+    {% if pred == "0" %}
+    <p>Your mole doesn't seems to be cancerous.</p>
+
+    {% elif pred == "1" %}
+    <p>Your mole seems to be cancerous. You should really go to the doctor.</p>
+
+    {% elif pred == "2" %}
+    <p>Your mole seems to be cancerous. You should really go to the doctor.</p>
+
+    {% else %}
+    <p>Something went wrong :/</p>
+
+    {% endif %}
 
 {% endblock %}

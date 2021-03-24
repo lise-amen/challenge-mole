@@ -81,8 +81,16 @@ def uploaded_image():
 	proba = fsoftmax(output)
 
 	_, indice = torch.max(proba, dim=1)
+
+	print(_)
+
+	pred = str(indice.item())
+
+	os.remove(img_path)
+
+	print(pred)
 	
-	return str(indice.item())
+	return render_template("uploaded.html", pred=pred)
 
 @app.route("/authors")
 def authors():
