@@ -3,13 +3,13 @@
 {% block content %}
 
     {% if pred == "0" %}
-    <p>Your mole doesn't seems to be cancerous.</p>
+    <p>Your mole doesn't seems to be cancerous. With a probability of {{ acc }}%.</p>
 
     {% elif pred == "1" %}
-    <p>Your mole seems to be cancerous. You should really go to the doctor.</p>
+    <p>Your mole seems to be cancerous. You should really go to the doctor. With a probability of {{ acc }}%.</p>
 
     {% elif pred == "2" %}
-    <p>Your mole seems to be cancerous. You should really go to the doctor.</p>
+    <p>Your mole seems to be cancerous. You should really go to the doctor. With a probability of {{ acc }}.%</p>
 
     {% else %}
     <p>Something went wrong :/</p>

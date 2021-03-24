@@ -80,17 +80,15 @@ def uploaded_image():
 
 	proba = fsoftmax(output)
 
-	_, indice = torch.max(proba, dim=1)
-
-	print(_)
+	acc, indice = torch.max(proba, dim=1)
 
 	pred = str(indice.item())
 
-	os.remove(img_path)
+	acc = str(round(acc.item() * 100, 2))
 
-	print(pred)
+	os.remove(img_path)
 	
-	return render_template("uploaded.html", pred=pred)
+	return render_template("uploaded.html", pred=pred, acc=acc)
 
 @mole_detect.route("/authors")
 def authors():
