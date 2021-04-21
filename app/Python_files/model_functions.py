@@ -7,7 +7,7 @@ import torchvision.transforms as transforms
 
 from torchvision import datasets
 
-import cv2
+from PIL import Image
 
 
 class mynet(nn.Module):
@@ -37,7 +37,7 @@ def data_transform(img_path:str):
 
     sizein = 64
     
-    image = cv2.imread(img_path)
+    image = Image.open(img_path)
 
     transformc = transforms.Compose([transforms.ToTensor(), transforms.Resize((sizein,sizein))])
     image = transformc(image)
