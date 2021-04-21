@@ -7,17 +7,9 @@
 
 
 import os
-import shutil
 import numpy as np
 import matplotlib.pyplot as plt
-import datetime
 import pandas as pd
-import seaborn as sns
-from IPython.display import display 
-
-from torch.utils.data import DataLoader
-from sklearn.model_selection import train_test_split
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -25,7 +17,8 @@ import torch.nn.functional as F
 import torchvision
 import torchvision.transforms as transforms
 from torchvision import datasets
-
+from torch.utils.data import DataLoader
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 
 
@@ -43,8 +36,8 @@ sizein = 64
 # resize + totensor
 transformc = transforms.Compose([transforms.Resize((sizein,sizein)), transforms.ToTensor()])
 
-# put here your folder './folder' which contains subfolders './folder/classe1', './folder/classe2', './folder/classe3'
-dat1 = datasets.ImageFolder('./folder', transform = transformc)
+# folder './pytorchdat4' contains subfolders './pytorchdat4/classe1', './pytorchdat4/classe2', './pytorchdat4/classe3'
+dat1 = datasets.ImageFolder('./pytorchdat4', transform = transformc)
 
 # check an image
 img, label = dat1[200]
@@ -116,7 +109,7 @@ batchsi=64
 train_loader1 = torch.utils.data.DataLoader(train_load, batch_size=batchsi, shuffle=True)
 
 # number of epochs
-nepoch=100
+nepoch=2
 
 optimizer = optim.SGD(model.parameters(), lr=1e-2)
 
